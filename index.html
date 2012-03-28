@@ -47,16 +47,17 @@ function success(position) {
   };
   var map = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
   
+//  var marker = new google.maps.Marker({
+//      position: latlng, 
+//      map: map, 
+//      title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)"
+//  });
   var marker = new google.maps.Marker({
-      position: latlng, 
-      map: map, 
-      title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)"
-  });
-  var marker = new google.maps.Marker({
-      position: new google.maps.LatLng(42, 50),
+      position: new google.maps.LatLng(position.coords.latitude+0.1,position.coords.longitude),
       map: map, 
       title:"Other Place!"
   });
+  console.log(marker);
 }
 
 function error(msg) {
