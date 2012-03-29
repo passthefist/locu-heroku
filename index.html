@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
+  </script>
 </head>
 <body>
   <iframe width="300" height="300" src="http://maps.google.com/maps?q=from:+88+kearny+to:+1440+sutter&hl=en&dirflg=r&ttype=now&output=embed">
   </iframe>
 </body>
+<script>
+  $.get("http://maps.google.com/maps?q=88+kearny&output=json",success)
+  function success(){
+    console.log(arguments);
+  }
+</script>
 </html>
