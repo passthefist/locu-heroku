@@ -37,7 +37,8 @@ function success(position) {
     
   document.querySelector('article').appendChild(mapcanvas);
   
-  var latlng = new google.maps.LatLng(position.coords.latitude+0.01, position.coords.longitude);
+  var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+  var latlng2 = new google.maps.LatLng(position.coords.latitude+0.003, position.coords.longitude);
   var myOptions = {
     zoom: 15,
     center: latlng,
@@ -51,6 +52,11 @@ function success(position) {
       position: latlng, 
       map: map, 
       title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)"
+  });
+  var marker2 = new google.maps.Marker({
+      position: latlng2, 
+      map: map, 
+      title:"Proof! (at least within a "+position.coords.accuracy+" meter radius)"
   });
   console.log(marker);
 }
