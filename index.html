@@ -5,11 +5,26 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=yes;" />
 
+  <title>Google Maps JavaScript API v3 Example: Place Search</title>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
   </script>
-
-  <title>Google Maps JavaScript API v3 Example: Place Search</title>
+  <script src="./locu_files/icanhaz.min.js">
+  </script>
   <script type="text/javascript" src="./locu_files/js"></script>
+  <script type="text/javascript" src="./locu_files/underscore-min.js">
+  </script>
+
+  <script id="locationBox" type="text/html">
+    <h4>
+      <img src="{{icon}}" width="32px" height="32px"/>
+      {{name}}
+    </h4>
+    <p class="centered" style="word-wrap: break-word;">
+    {{vicinity}}
+    <a href="#" class="addLocation">Save</a>
+    </p>
+  </script>
 
     <style type="text/css">
       #map {
@@ -26,6 +41,19 @@
     <script type="text/javascript">
       var map;
       var infowindow;
+
+      function toh(arr){
+        return _.chain(arr)
+          .map(function(elem){
+            console.log(this)
+            return $(elem)[0].outerHTML;
+          })
+          .compact()
+          .reduce(function(memo, elem){
+            return memo + elem;
+          })
+          .value();
+      };
 
       function init() {
         navigator.geolocation.getCurrentPosition(function(loc){
@@ -45,7 +73,8 @@
         map = new google.maps.Map(document.getElementById('map'), {
           mapTypeId: google.maps.MapTypeId.ROADMAP,
           center: center,
-          zoom: 16
+          zoom: 16,
+          disableDefaultUI: true
         });
 
         var request = {
@@ -53,7 +82,6 @@
           radius: 0
         };
 
-        infowindow = new google.maps.InfoWindow();
         var service = new google.maps.places.PlacesService(map);
         service.search(request, callback);
       }
@@ -80,7 +108,11 @@
         map.panTo(placeLoc);
 
         google.maps.event.addListener(marker, 'click', function() {
-          infowindow.setContent(place.name);
+          var infowindow = new google.maps.InfoWindow({
+            maxWidth: 100,
+            content: toh(ich.locationBox(place))
+          });
+
           infowindow.open(map, this);
         });
       }
@@ -106,8 +138,6 @@
           name: $("#search .location").val()
         };
 
-        console.log("NAME: "+request.name)
-
         infowindow = new google.maps.InfoWindow();
         var service = new google.maps.places.PlacesService(map);
 
@@ -123,7 +153,6 @@
             service.search(request,callback);
           }
         });
-
       }
     </script>
     <script type="text/javascript" charset="UTF-8" src="./locu_files/{common,map,util,controls,places_impl}.js"></script>
