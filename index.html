@@ -30,19 +30,20 @@
       }
 
       function start(loc) {
-        var pyrmont = new google.maps.LatLng(loc.latitude, loc.longitude);
+        var center = new google.maps.LatLng(loc.latitude, loc.longitude);
 
         map = new google.maps.Map(document.getElementById('map'), {
           mapTypeId: google.maps.MapTypeId.ROADMAP,
-          center: pyrmont,
+          center: center,
           zoom: 15
         });
 
         var request = {
-          location: pyrmont,
-          radius: 500,
-          keyword: "88 kearny"
+          location: center,
+          radius: 2500,
+          keyword: "88 sutter"
         };
+
         infowindow = new google.maps.InfoWindow();
         var service = new google.maps.places.PlacesService(map);
         service.search(request, callback);
@@ -57,11 +58,14 @@
       }
 
       function createMarker(place) {
+        console.log(place);
         var placeLoc = place.geometry.location;
         var marker = new google.maps.Marker({
           map: map,
-          position: place.geometry.location
+          position: placeLoc 
         });
+
+        map.panTo(placeLoc);
 
         google.maps.event.addListener(marker, 'click', function() {
           infowindow.setContent(place.name);
