@@ -88,6 +88,7 @@
       google.maps.event.addDomListener(window, 'load', init);
 
       function doSearch(){
+        $(this).blur();
         setTimeout(newSearch,100);
         return false;
       };
@@ -128,6 +129,7 @@
     <script type="text/javascript" charset="UTF-8" src="./locu_files/{common,map,util,controls,places_impl}.js"></script>
     <script type="text/javascript" charset="UTF-8" src="./locu_files/{onion,infowindow}.js"></script><script type="text/javascript" charset="UTF-8" src="./locu_files/{marker,stats}.js"></script></head>
   <body>
+    Locu
     <form id="search" action="javascript: doSearch()" onsubmit="doSearch()">
       <input name="location" class="location" type="text" style="width: 320px;">
     </form>
