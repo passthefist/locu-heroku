@@ -53,7 +53,7 @@ function success(position) {
 //      title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)"
 //  });
   var marker = new google.maps.Marker({
-      position: new google.maps.LatLng(position.coords.latitude+0.5,position.coords.longitude),
+      position: new google.maps.LatLng(position.coords.latitude+0.1,position.coords.longitude),
       map: map, 
       title:"Proof!"
   });
