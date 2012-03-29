@@ -3,7 +3,7 @@
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">@media print {  .gmnoprint {    display:none  }}@media screen {  .gmnoscreen {    display:none  }}</style>
     <meta charset="UTF-8">
     <title>Google Maps JavaScript API v3 Example: Place Search</title>
-    <script type="text/javascript" src="./locu_files/js"></script><script src="./locu_files/{main,places}.js" type="text/javascript"></script>
+    <script type="text/javascript" src="./locu_files/js"></script>
 
     <style type="text/css">
       #map {
@@ -18,8 +18,19 @@
       var map;
       var infowindow;
 
-      function initialize() {
-        var pyrmont = new google.maps.LatLng(-33.8665433, 151.1956316);
+      function init() {
+        navigator.geolocation.getCurrentPosition(function(loc){
+          start(loc.coords);
+          }, function(err){
+            start({
+              latitude: 37.787605,
+              longitude: -122.4242011 
+              });
+          });
+      }
+
+      function start(loc) {
+        var pyrmont = new google.maps.LatLng(loc.latitude, loc.longitude);
 
         map = new google.maps.Map(document.getElementById('map'), {
           mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -30,7 +41,7 @@
         var request = {
           location: pyrmont,
           radius: 500,
-          types: ['store']
+          keyword: "88 kearny"
         };
         infowindow = new google.maps.InfoWindow();
         var service = new google.maps.places.PlacesService(map);
@@ -58,7 +69,7 @@
         });
       }
 
-      google.maps.event.addDomListener(window, 'load', initialize);
+      google.maps.event.addDomListener(window, 'load', init);
     </script>
   <script type="text/javascript" charset="UTF-8" src="./locu_files/{common,map,util,controls,places_impl}.js"></script><script type="text/javascript" charset="UTF-8" src="./locu_files/{onion,infowindow}.js"></script><script type="text/javascript" charset="UTF-8" src="./locu_files/{marker,stats}.js"></script></head>
   <body>
