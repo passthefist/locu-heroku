@@ -5,6 +5,9 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=yes;" />
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
+  </script>
+
   <title>Google Maps JavaScript API v3 Example: Place Search</title>
   <script type="text/javascript" src="./locu_files/js"></script>
 
@@ -35,8 +38,9 @@
           });
       }
 
+      var center;
       function start(loc) {
-        var center = new google.maps.LatLng(loc.latitude, loc.longitude);
+        center = new google.maps.LatLng(loc.latitude, loc.longitude);
 
         map = new google.maps.Map(document.getElementById('map'), {
           mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -45,9 +49,7 @@
         });
 
         var request = {
-          location: center,
-          radius: 2500,
-          keyword: "88 sutter"
+          location: center
         };
 
         infowindow = new google.maps.InfoWindow();
@@ -63,6 +65,8 @@
         }
       }
 
+      var markers = [];
+
       function createMarker(place) {
         console.log(place);
         var placeLoc = place.geometry.location;
@@ -71,6 +75,7 @@
           position: placeLoc 
         });
 
+        markers.push(marker);
         map.panTo(placeLoc);
 
         google.maps.event.addListener(marker, 'click', function() {
@@ -80,10 +85,49 @@
       }
 
       google.maps.event.addDomListener(window, 'load', init);
+
+      function doSearch(){
+        setTimeout(newSearch,100);
+        return false;
+      };
+
+      function newSearch(){
+        for (var i = 0; i < markers.length; i++ ) {
+          markers[i].setMap(null);
+        }
+
+        var request = {
+          location: center,
+          radius: 2500,
+          name: $("#search .location").val()
+        };
+
+        console.log("NAME: "+request.name)
+
+        infowindow = new google.maps.InfoWindow();
+        var service = new google.maps.places.PlacesService(map);
+
+        service.search(request, function(result, status){
+          if (status == google.maps.places.PlacesServiceStatus.OK) {
+            callback(result, status);
+          }else{
+            request = {
+              location: center,
+              radius: 2500,
+              keyword: $("#search .location").val()
+            }
+            service.search(request,callback);
+          }
+        });
+
+      }
     </script>
     <script type="text/javascript" charset="UTF-8" src="./locu_files/{common,map,util,controls,places_impl}.js"></script>
     <script type="text/javascript" charset="UTF-8" src="./locu_files/{onion,infowindow}.js"></script><script type="text/javascript" charset="UTF-8" src="./locu_files/{marker,stats}.js"></script></head>
   <body>
+    <form id="search" action="javascript: doSearch()" onsubmit="doSearch()">
+      <input name="location" class="location" type="text" style="width: 320px;">
+    </form>
     <div id="map" style="position: relative; background-color: rgb(229, 227, 223); overflow-x: hidden; overflow-y: hidden; ">
     </div>
 </body>
