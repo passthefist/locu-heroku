@@ -36,7 +36,9 @@ Namespace("SelectorSearch",function() {
     $(div).animate({
       opacity: 1.0,
       top: "0px"
-    },500);
+    }, 500, function(){
+      $("#locSearch .location").focus();
+    });
   }
 
   var asyncShow = new AsyncCall(this, function(div) {
