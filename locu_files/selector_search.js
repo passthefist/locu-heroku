@@ -1,5 +1,4 @@
 $.namespace("LocationSearch",function() {
-
     function toh(arr){
       return _.chain(arr)
         .map(function(elem){
