@@ -16,8 +16,8 @@ Namespace("SelectorSearch",function() {
       evt.preventDefault();
       setTimeout(newSearch,100);
     });
-    navigator.geolocation.getCurrentPosition(function(loc){
-      loc = loc.coords;
+    navigator.geolocation.getCurrentPosition(function(geo){
+      loc = geo.coords;
       asyncShow.call();
     }, function(err){
       loc = {
