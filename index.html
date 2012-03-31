@@ -7,18 +7,7 @@
     <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=yes;" />
 
     <title>Locu :: Get Around</title>
-    <style type="text/css">
-      @media print {  
-        .gmnoprint {
-          display:none  
-        }
-      }
-      @media screen {
-        .gmnoscreen {
-          display:none  
-        }
-      }
-    </style>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
     </script>
     <script src="./locu_files/icanhaz.min.js">
@@ -28,11 +17,15 @@
     </script>
   </head>
   <body>
-    <div id="locSearch"></div>
+
+    <div id="locSearch">
+    </div>
   </body>
   <script>
+    $("#locSearch").hide();
     $.get("./locu_files/selector_search.html", function(response){ 
       $("#locSearch").append(response);
+      $("#locSearch").slideToggle();
     });
   </script>
 </html>
