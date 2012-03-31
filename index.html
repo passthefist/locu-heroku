@@ -31,8 +31,8 @@
     <div id="locSearch"></div>
   </body>
   <script>
-    $.get("./locu_files/selector_search.html", function(){ 
-      console.log(arguments);
+    $.get("./locu_files/selector_search.html", function(response){ 
+      $("#locSearch").append(response);
     });
   </script>
 </html>
