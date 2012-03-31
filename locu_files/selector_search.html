@@ -1,22 +1,3 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
-</script>
-<script src="./locu_files/icanhaz.min.js">
-</script>
-<script type="text/javascript" src="./locu_files/js"></script>
-<script type="text/javascript" src="./locu_files/underscore-min.js">
-</script>
-
-<script id="locationBox" type="text/html">
-  <h4>
-    <img src="{{icon}}" width="32px" height="32px"/>
-    {{name}}
-  </h4>
-  <p class="centered" style="word-wrap: break-word;">
-  {{vicinity}}
-  <a href="#" class="addLocation">Save</a>
-  </p>
-</script>
-
 <style type="text/css">
   #map {
     height: 100%;
@@ -28,6 +9,17 @@
     height: 380px;
   }
 </style>
+
+<script id="locationBox" type="text/html">
+  <h4>
+    <img src="{{icon}}" width="32px" height="32px"/>
+    {{name}}
+  </h4>
+  <p class="centered" style="word-wrap: break-word;">
+  {{vicinity}}
+  <a href="#" class="addLocation">Save</a>
+  </p>
+</script>
 
 <script type="text/javascript">
   $.namespace("LocationSearch",function() {
@@ -146,13 +138,10 @@
     };
   }
 </script>
-<script type="text/javascript" charset="UTF-8" src="./locu_files/{common,map,util,controls,places_impl}.js"></script>
-<script type="text/javascript" charset="UTF-8" src="./locu_files/{onion,infowindow}.js"></script><script type="text/javascript" charset="UTF-8" src="./locu_files/{marker,stats}.js"></script></head>
-<body>
-  Locu #VER3
-  <form id="search" action="javascript: doSearch()" onsubmit="doSearch()">
-    <input name="location" class="location" type="text" style="width: 320px;">
-  </form>
-  <div id="map" style="position: relative; background-color: rgb(229, 227, 223); overflow-x: hidden; overflow-y: hidden; ">
-  </div>
-</body>
+
+Locu #VER3
+<form id="search" action="javascript: doSearch()" onsubmit="doSearch()">
+  <input name="location" class="location" type="text" style="width: 320px;">
+</form>
+<div id="map" style="position: relative; background-color: rgb(229, 227, 223); overflow-x: hidden; overflow-y: hidden; ">
+</div>
