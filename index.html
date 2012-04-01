@@ -67,9 +67,9 @@
         $("#locSearchContainer").hide();
         searchWidget = new SelectorSearch("#locSearchContainer");
         searchWidget.show();
-      });
-      $("li").click(function(){
-        searchWidget.show();
+        $("#locationsList").click(function(){
+          searchWidget.show();
+        });
       });
     </script>
   </head>
