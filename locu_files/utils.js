@@ -22,22 +22,35 @@ function Namespace(name,func){
   });
 }
 
+function defer(func){
+  setTimeout(func,100);
+}
+
 function AsyncCall(context, func) {
   var argQueue = [];
   var ready = false;
-
+  var afters = [];
+  
   this.push = function() {
     argQueue.push(arguments);
     if(ready){
       this.call()
     }
+    return {
+      after: function(afterFunc) {
+        afters.push(afterFunc);
+      }
+    }
   }
 
   this.call = function() {
-    ready = true;
     while(argQueue.length > 0){
       func.apply(context, argQueue.pop());
     }
+    while(afters.length > 0){
+      afters.pop().call();
+    }
+    ready = true;
   }
 }
 
