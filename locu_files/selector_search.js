@@ -42,8 +42,7 @@ function SelectorSearch(targ) {
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       center: center,
       zoom: 16,
-      disableDefaultUI: true,
-      key: 'AIzaSyCYmN6mQZTfSDoArXP62WZjqkMh7PI9Wk8'
+      disableDefaultUI: true
     });
     var request = {
       location: center,
@@ -102,8 +101,7 @@ function SelectorSearch(targ) {
     var request = {
       location: center,
       radius: 2500,
-      name: $("#locSearch .location").val(),
-      key: 'AIzaSyCYmN6mQZTfSDoArXP62WZjqkMh7PI9Wk8'
+      name: $("#locSearch .location").val()
     };
 
     infowindow = new google.maps.InfoWindow();
@@ -116,8 +114,7 @@ function SelectorSearch(targ) {
         request = {
           location: center,
           radius: 2500,
-          keyword: $("#locSearch .location").val(),
-          key: 'AIzaSyCYmN6mQZTfSDoArXP62WZjqkMh7PI9Wk8'
+          keyword: $("#locSearch .location").val()
         };
         service.search(request,callback);
       }
