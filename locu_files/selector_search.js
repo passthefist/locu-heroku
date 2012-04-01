@@ -48,7 +48,8 @@ function SelectorSearch(targ) {
       location: center,
       radius: 0
     };
-
+    console.log("Request");
+    console.log(request);
     var service = new google.maps.places.PlacesService(map);
     service.search(request, callback);
   }
@@ -67,6 +68,12 @@ function SelectorSearch(targ) {
       for (var i = 0; i < results.length; i++) {
         createMarker(results[i]);
       }
+    }
+    else
+    {
+      alert("The google did not respond");
+      console.log(results);
+      console.log(status);
     }
   }
 
@@ -103,6 +110,8 @@ function SelectorSearch(targ) {
       radius: 2500,
       name: $("#locSearch .location").val()
     };
+    console.log("Request");
+    console.log(request);
 
     infowindow = new google.maps.InfoWindow();
     var service = new google.maps.places.PlacesService(map);
@@ -116,6 +125,8 @@ function SelectorSearch(targ) {
           radius: 2500,
           keyword: $("#locSearch .location").val()
         };
+        console.log("Keyword Request");
+        console.log(request);
         service.search(request,callback);
       }
     });
