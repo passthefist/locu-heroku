@@ -69,3 +69,35 @@ function Callbacks(){
   }
 }
 
+function undef(obj){
+  return (typeof obj) === 'undefined'
+}
+
+function saveable(name, def){
+  var key = name;
+  var obj = def;
+
+  if(undef(localStorage)) {
+    throw "local storage is required"
+  }
+ 
+  function mixin() { 
+    this.save = save;
+    this.load = load;
+  }
+
+  function save() {
+    localStorage[key] = JSON.stringify(this);
+  }
+  
+  function load() {
+    if(!undef(localStorage[key])) {
+      obj = JSON.parse(localStorage[key]);
+    }
+    mixin.apply(obj);
+    return obj;
+  }
+
+  return load();
+}
+
