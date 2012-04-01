@@ -64,6 +64,7 @@ function SelectorSearch(targ) {
   };
 
   function callback(results, status) {
+    console.log("called back");
     if (status == google.maps.places.PlacesServiceStatus.OK) {
       for (var i = 0; i < results.length; i++) {
         createMarker(results[i]);
@@ -78,6 +79,7 @@ function SelectorSearch(targ) {
   }
 
   function createMarker(place) {
+    console.log("create marker");
     var placeLoc = place.geometry.location;
     var marker = new google.maps.Marker({
       map: map,
