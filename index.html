@@ -24,7 +24,7 @@
       #locSearchContainer {
         width: 320px;
         height: 380px;
-        position: relative;
+        position: absolute;
         left: 0px;
         top: 650px;
       }
@@ -33,6 +33,13 @@
         overflow: hidden;
         width: 100%;
         height: 100%;
+      }
+      #locationsList {
+        position: relative;
+        left: 0px;
+        top: 0px;
+        width: 320px;
+        height: 380px;
       }
       body {
         width: 325px;
@@ -44,10 +51,7 @@
         <img src="{{icon}}" width="32px" height="32px"/>
         {{name}}
       </h4>
-      <p class="centered" style="word-wrap: break-word;">
-      {{vicinity}}
-      <a href="#" class="addLocation">Save</a>
-      </p>
+      <button class="addLocation">Save</button>
     </script>
 
     <script id="locButton" type="text/html">
@@ -61,19 +65,32 @@
     <script>
       $(function(){
         $("#locSearchContainer").hide();
-        SelectorSearch.show("#locSearchContainer");
+        searchWidget = new SelectorSearch("#locSearchContainer");
+        searchWidget.show();
+      });
+      $("li").click(function(){
+        searchWidget.show();
       });
     </script>
   </head>
   <body>
     <div id="appContainer">
+      <div id="locationsList">
+        <ul>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
       <div id="locSearchContainer">
       </div>
-    </div>
-    <div>
-    </div>
-    <div style="display: none">
-      <button id="keyboardHide"/>
     </div>
   </body>
   <script>

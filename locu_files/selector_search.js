@@ -1,8 +1,10 @@
-Namespace("SelectorSearch",function() {
+function SelectorSearch(targ) {
   var loc;
   var center;
-  var selector;
+  var target = $(targ);
   var selectEvt = new Callbacks();
+  var selected;
+  var markers = [];
 
   var searchHtml = 
       '<form id="locSearch">' +
@@ -12,40 +14,31 @@ Namespace("SelectorSearch",function() {
       '</div>'
 
   function init() {
-    $("#locSearch").submit(function(evt) {
-      evt.preventDefault();
-      setTimeout(newSearch,100);
-    });
+    target.append(searchHtml);
+
     navigator.geolocation.getCurrentPosition(function(geo){
       loc = geo.coords;
-      asyncShow.call();
+      defer(ready);
     }, function(err){
       loc = {
         latitude: 37.787605,
         longitude: -122.4242011 
         };
-      asyncShow.call();
+      defer(ready);
     });
   }
-
-  function show(div) {
-    $(div).append(searchHtml);
-    asyncShow.push($(div).find(".map"));
-   
-    $(div).show(); 
-    $(div).animate({
-      opacity: 1.0,
-      top: "0px"
-    }, 500, function(){
-      $("#locSearch .location").focus();
+  
+  function ready(){
+    $("#locSearch").submit(function(evt) {
+      evt.preventDefault();
+      setTimeout(newSearch,100);
     });
-  }
 
-  var asyncShow = new AsyncCall(this, function(div) {
-    selector = $(div);
+    $(document).on("click",".addLocation", invokeSelected);
+  
     center = new google.maps.LatLng(loc.latitude, loc.longitude);
 
-    map = new google.maps.Map(selector[0], {
+    map = new google.maps.Map(target.find(".map")[0], {
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       center: center,
       zoom: 16,
@@ -59,7 +52,16 @@ Namespace("SelectorSearch",function() {
 
     var service = new google.maps.places.PlacesService(map);
     service.search(request, callback);
-  });
+  }
+
+  this.show = function() {
+    target.show(); 
+    target.animate({
+      top: "0px"
+    }, 400, function(){
+      $("#locSearch .location").focus();
+    });
+  };
 
   function callback(results, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -68,8 +70,6 @@ Namespace("SelectorSearch",function() {
       }
     }
   }
-
-  var markers = [];
 
   function createMarker(place) {
     var placeLoc = place.geometry.location;
@@ -83,15 +83,14 @@ Namespace("SelectorSearch",function() {
 
     google.maps.event.addListener(marker, 'click', function() {
       var infowindow = new google.maps.InfoWindow({
-        maxWidth: 100,
+        maxWidth: 50,
         content: toh(ich.locationBox(place))
       });
 
       infowindow.open(map, this);
+      selected = marker;
     });
   }
-
-  google.maps.event.addDomListener(window, 'load', init);
 
   function newSearch(){
     $("#locSearch .location").blur();
@@ -123,16 +122,16 @@ Namespace("SelectorSearch",function() {
     });
   };
 
-  function selectedCallback(func){
+  this.onSelected = function(func){
     selectEvt.add(func);      
   }
 
   function invokeSelected(){
     selectEvt.invoke();
+    $("#locSearchContainer").animate({
+      top: "500px"
+    }, 350);
   };
-
-  return {
-    show: show,
-    onSelected: selectedCallback
-  }
-});
+  
+  init();
+};
