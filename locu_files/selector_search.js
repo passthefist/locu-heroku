@@ -80,6 +80,7 @@ function SelectorSearch(targ) {
 
   function createMarker(place) {
     console.log("create marker");
+    console.log(JSON.stringify(place));
     var placeLoc = place.geometry.location;
     var marker = new google.maps.Marker({
       map: map,
