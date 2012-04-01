@@ -22,8 +22,8 @@ function Namespace(name,func){
   });
 }
 
-function defer(func){
-  setTimeout(func,100);
+function esc(str){
+  return $.serialize(str);
 }
 
 function AsyncCall(context, func) {
@@ -63,6 +63,7 @@ function Callbacks(){
 
   this.invoke = function() {
     var args = arguments;
+    var context = this;
     _.each(funcs, function(f) {
       f.apply(context, args);
     });
