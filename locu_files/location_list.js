@@ -1,5 +1,8 @@
-function locationList(){
+function locationList(selector){
+  var target = $(selector);
   var locations = saveable("locations", []);
+  var selectEvt = new Callbacks();
+  var newEvt = new Callbacks();
 
   this.add = function(tag, lat, lng){
     locations.push({
@@ -10,6 +13,7 @@ function locationList(){
       }
     });  
     locations.save();
+    render();
   };
 
   this.remove = function(tag) {
@@ -18,4 +22,41 @@ function locationList(){
     });
     locations.splice(index,1);
   };
+
+  this.coordsFor = function(tag) {
+    var index = _.find(locations, function(val) {
+      return value.tag === tag;
+    });
+    return locations[index].coords;
+  } 
+
+  this.onSelected = function(func){
+    selectEvt.add(func);      
+  }
+
+  this.onNew = function(func){
+    newEvt.add(func);      
+  }
+
+  function invokeSelected(loc){
+    selectEvt.invoke(loc);
+  }
+
+  function invokeNew(){
+    newEvt.invoke();
+  }
+
+  function render() {
+    target.empty();
+    _.each(locations, function (loc){
+      $(ich.locButton(loc)).appendTo(target)
+      .click(function() {
+        invokeSelected(loc);
+      });
+    });
+    ich.locButton({tag: "+ Add Location +"}).appendTo(target)
+    .click(invokeNew);
+  }
+
+  render();
 }

@@ -1,5 +1,6 @@
 function SelectorSearch(targ) {
   var loc;
+  var map;
   var center;
   var target = $(targ);
   var selectEvt = new Callbacks();
@@ -18,13 +19,13 @@ function SelectorSearch(targ) {
 
     navigator.geolocation.getCurrentPosition(function(geo){
       loc = geo.coords;
-      defer(ready);
+      _.defer(ready);
     }, function(err){
       loc = {
         latitude: 37.787605,
         longitude: -122.4242011 
         };
-      defer(ready);
+      _.defer(ready);
     });
   }
   
@@ -54,6 +55,7 @@ function SelectorSearch(targ) {
 
   this.show = function() {
     target.show(); 
+    google.maps.event.trigger(map, 'resize');
     target.animate({
       top: "0px"
     }, 400, function(){
@@ -129,7 +131,11 @@ function SelectorSearch(targ) {
   }
 
   function invokeSelected(){
-    selectEvt.invoke();
+    selectEvt.invoke({
+      latitude: selected.position.lat(),
+      longitude: selected.position.lng(),
+      name: $("#locSearch .location").val()
+    });
     $("#locSearchContainer").animate({
       top: "500px"
     }, 350);
