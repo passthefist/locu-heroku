@@ -62,7 +62,9 @@ function SelectorSearch(targ) {
     target.animate({
       top: "0px"
     }, 400, function(){
-      $("#locSearch .location").focus();
+      setTimeout(function(){
+        $("#locSearch .location").focus()
+      }, 250);
     });
   };
 
