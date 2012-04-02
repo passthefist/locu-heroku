@@ -63,10 +63,10 @@ function locationList(selector){
 
     ich.optButton({text: "+ Add Current Location +"})
       .appendTo(target.find(".bottom"))
-      .click(addCurrent);
+      .click(this.addCurrent);
   }
 
-  function addCurrent(){
+  this.addCurrent = function(){
     navigator.geolocation.getCurrentPosition(
       _.bind(function(geo){
           var tag = prompt("What is the name of this place?");
