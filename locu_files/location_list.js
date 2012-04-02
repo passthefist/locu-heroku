@@ -73,6 +73,14 @@ function locationList(selector){
       });
     });
 
+    if (locations.length === 0){
+      var defStr = "Locu helps you find routes to the "+
+                   "places you commonly visit. Use the "+
+                   "buttons below to add locations and "+
+                   "get around faster."
+      $(ich.locButton({tag: defStr})).appendTo(target)
+    }
+
     $("<div></div>").appendTo(target).addClass("bottom");
 
     ich.optButton({text: "Add From Search"})
