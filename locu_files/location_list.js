@@ -70,7 +70,9 @@ function locationList(selector){
   function addCurrent(){
     navigator.geolocation.getCurrentPosition(function(geo) {
         var tag = prompt("What is the name of this place?");
-        self.add(tag, geo.coords.latitude, geo.coords.longitude);
+        if(tag) {
+          self.add(tag, geo.coords.latitude, geo.coords.longitude);
+        }
       }, 
       function(err) {
         alert("Could not find your location");
