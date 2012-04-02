@@ -10,7 +10,7 @@ function SelectorSearch(targ) {
   var searchHtml = 
       '<form id="locSearch">' +
         '<input name="location" class="location" type="text">'+
-        '<div class="close">Back</div>'+
+        '<span class="close">Back</span>'+
       '</form>' +
       '<div class="map" style="position: relative; background-color: rgb(229, 227, 223); overflow-x: hidden; overflow-y: hidden; ">' +
       '</div>'
