@@ -24,6 +24,12 @@ function locationList(selector){
     locations.splice(index,1);
   };
 
+  this.removeAll = function() {
+    locations.splice(0,locations.length);
+    locations.save();
+    render();
+  }
+
   this.coordsFor = function(tag) {
     var index = _.find(locations, function(val) {
       return value.tag === tag;
@@ -70,7 +76,7 @@ function locationList(selector){
           window.location = url + p;
         },
         function(){
-          alert("Could not find your position");
+          alert("The location service could not be reached.");
         })
       });
     });
@@ -102,7 +108,7 @@ function locationList(selector){
         }
       }, 
       function(err) {
-        alert("Could not find your location");
+        alert("The location service could not be reached.");
     });
   }
 

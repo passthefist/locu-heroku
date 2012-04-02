@@ -63,6 +63,7 @@ function SelectorSearch(targ) {
       top: "0px"
     }, 400, function(){
       setTimeout(function(){
+        $("#locSearch .location").val("");
         $("#locSearch .location").focus();
       }, 250);
     });
@@ -76,7 +77,7 @@ function SelectorSearch(targ) {
     }
     else
     {
-      alert("The Google did not respond");
+      alert("No places found, or the Google didn't respond.");
     }
   }
 
