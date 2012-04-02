@@ -65,6 +65,9 @@ function locationList(selector){
             z: 15,
             ttype: 'now'
           });
+          console.log("OpenMap");
+          alert(url+p);
+
           window.location = url + p;
         },
         function(){
