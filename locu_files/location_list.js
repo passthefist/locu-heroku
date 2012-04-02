@@ -3,6 +3,7 @@ function locationList(selector){
   var locations = saveable("locations", []);
   var selectEvt = new Callbacks();
   var newEvt = new Callbacks();
+  var self = this;
 
   this.add = function(tag, lat, lng){
     locations.push({
@@ -63,20 +64,17 @@ function locationList(selector){
 
     ich.optButton({text: "+ Add Current Location +"})
       .appendTo(target.find(".bottom"))
-      .click(this.addCurrent);
+      .click(addCurrent);
   }
 
-  this.addCurrent = function(){
-    navigator.geolocation.getCurrentPosition(
-      _.bind(function(geo){
-          var tag = prompt("What is the name of this place?");
-          this.add(tag, geo.coords.latitude, geo.coords.longitude);
-        }, this), 
-      function(err){
+  function addCurrent(){
+    navigator.geolocation.getCurrentPosition(function(geo) {
+        var tag = prompt("What is the name of this place?");
+        self.add(tag, geo.coords.latitude, geo.coords.longitude);
+      }, 
+      function(err) {
         alert("Could not find your location");
     });
-
-    
   }
 
   render();
