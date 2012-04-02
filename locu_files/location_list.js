@@ -54,8 +54,29 @@ function locationList(selector){
         invokeSelected(loc);
       });
     });
-    ich.locButton({tag: "+ Add Location +"}).appendTo(target)
-    .click(invokeNew);
+
+    $("<div></div>").appendTo(target).addClass("bottom");
+
+    ich.optButton({text: "? Add From Search ?"})
+      .appendTo(target.find(".bottom"))
+      .click(invokeNew);
+
+    ich.optButton({text: "+ Add Current Location +"})
+      .appendTo(target.find(".bottom"))
+      .click(addCurrent);
+  }
+
+  function addCurrent(){
+    navigator.geolocation.getCurrentPosition(
+      _.bind(function(geo){
+          var tag = prompt("What is the name of this place?");
+          this.add(tag, geo.coords.latitude, geo.coords.longitude);
+        }, this), 
+      function(err){
+        alert("Could not find your location");
+    });
+
+    
   }
 
   render();

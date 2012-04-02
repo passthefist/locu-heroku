@@ -9,7 +9,8 @@ function SelectorSearch(targ) {
 
   var searchHtml = 
       '<form id="locSearch">' +
-        '<input name="location" class="location" type="text" style="width: 320px;">' +
+        '<input name="location" class="location" type="text">'+
+        '<div class="close">Back</div>'+
       '</form>' +
       '<div class="map" style="position: relative; background-color: rgb(229, 227, 223); overflow-x: hidden; overflow-y: hidden; ">' +
       '</div>'
@@ -34,6 +35,8 @@ function SelectorSearch(targ) {
       evt.preventDefault();
       setTimeout(newSearch,100);
     });
+
+    $("#locSearch .close").click(hide);
 
     $(document).on("click",".addLocation", invokeSelected);
   
@@ -130,15 +133,19 @@ function SelectorSearch(targ) {
     selectEvt.add(func);      
   }
 
+  function hide(){
+    $("#locSearchContainer").animate({
+      top: ($(window).height()+50)
+    }, 350);
+  }
+
   function invokeSelected(){
     selectEvt.invoke({
       latitude: selected.position.lat(),
       longitude: selected.position.lng(),
       name: $("#locSearch .location").val()
     });
-    $("#locSearchContainer").animate({
-      top: "500px"
-    }, 350);
+    hide();
   };
   
   init();
