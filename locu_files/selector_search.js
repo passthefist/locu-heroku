@@ -64,7 +64,7 @@ function SelectorSearch(targ) {
     }, 400, function(){
       setTimeout(function(){
         $("#locSearch .location").focus()
-        alert($("#locSearch .location"));
+        alert($("#locSearch .location").parent().html())
       }, 250);
     });
   };
