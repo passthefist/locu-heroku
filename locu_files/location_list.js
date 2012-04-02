@@ -65,7 +65,7 @@ function locationList(selector){
       .click(function() {
         navigator.geolocation.getCurrentPosition(function(geo){
           var url = "http://maps.google.com/maps?";
-          var p = $.params({
+          var p = $.param({
             saddr: locp(geo.coords),
             daddr: locp(loc.coords),
             dirflg: 'r',
