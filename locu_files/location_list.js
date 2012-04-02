@@ -48,14 +48,7 @@ function locationList(selector){
   }
 
   function locp(coords) {
-    function s(v){
-      if( v < 0) {
-        return "+"+v;
-      }
-      return ""+v;
-    }
-    
-    return s(coords.latitude) + "," + s(coords.longitude);
+    return (coords.latitude) + "," + (coords.longitude);
   }
 
   function render() {
