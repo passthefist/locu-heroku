@@ -1,6 +1,6 @@
 function locationList(selector){
   var target = $(selector);
-  var locations = saveable("locations", []);
+  var locations = saveable("locu_locations", []);
   var selectEvt = new Callbacks();
   var newEvt = new Callbacks();
   var self = this;
