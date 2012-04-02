@@ -63,7 +63,7 @@ function SelectorSearch(targ) {
       top: "0px"
     }, 400, function(){
       setTimeout(function(){
-        $("#locSearch .location").focus()
+        $("#locSearch .location").focus();
       }, 250);
     });
   };
