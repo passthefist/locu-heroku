@@ -76,7 +76,7 @@ function locationList(selector){
         },
         function(){
           alert("Could not find your position");
-        }
+        })
       });
     });
 
