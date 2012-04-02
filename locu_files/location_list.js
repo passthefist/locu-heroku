@@ -58,11 +58,11 @@ function locationList(selector){
 
     $("<div></div>").appendTo(target).addClass("bottom");
 
-    ich.optButton({text: "? Add From Search ?"})
+    ich.optButton({text: "Add From Search"})
       .appendTo(target.find(".bottom"))
       .click(invokeNew);
 
-    ich.optButton({text: "+ Add Current Location +"})
+    ich.optButton({text: "Add Current Location"})
       .appendTo(target.find(".bottom"))
       .click(addCurrent);
   }
