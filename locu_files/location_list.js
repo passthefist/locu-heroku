@@ -43,8 +43,19 @@ function locationList(selector){
     selectEvt.invoke(loc);
   }
 
-  function invokeNew(){
+  function invokeNew() {
     newEvt.invoke();
+  }
+
+  function locp(coords) {
+    function s(v){
+      if( v < 0) {
+        return "+"+v;
+      }
+      return ""+v;
+    }
+    
+    return s(coords.latitude) + "," + s(coords.longitude);
   }
 
   function render() {
@@ -52,7 +63,20 @@ function locationList(selector){
     _.each(locations, function (loc){
       $(ich.locButton(loc)).appendTo(target)
       .click(function() {
-        invokeSelected(loc);
+        navigator.geolocation.getCurrentPosition(function(geo){
+          var url = "http://maps.google.com/maps?";
+          var p = $.params({
+            saddr: locp(geo.coords),
+            daddr: locp(loc.coords),
+            dirflg: 'r',
+            z: 15,
+            ttype: 'now'
+          });
+          window.location = url + p;
+        },
+        function(){
+          alert("Could not find your position");
+        }
       });
     });
 

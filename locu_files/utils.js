@@ -63,7 +63,6 @@ function Callbacks(){
 
   this.invoke = function() {
     var args = arguments;
-    var context = this;
     _.each(funcs, function(f) {
       f.apply(context, args);
     });
