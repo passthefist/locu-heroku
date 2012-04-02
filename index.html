@@ -169,6 +169,10 @@
         searchWidget.onSelected(function(loc){
           list.add(loc.name, loc.latitude, loc.longitude);
         });
+        $("#settings").hide();
+        setTimeout(function(){
+          $("#settings").fadeIn(1000);
+        }, 3000);
         $("#settings").click(function() {
           $("#settingsMenu").animate({
             top: "0px"
