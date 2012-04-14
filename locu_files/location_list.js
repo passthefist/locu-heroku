@@ -67,11 +67,10 @@ function locationList(selector){
           var p = $.param({
             saddr: locp(geo.coords),
             daddr: locp(loc.coords),
-            dirflg: 'r',
             z: 15,
             ttype: 'now',
-            dirtype: settings.dirType,
-            sortpref: settings.sortPref
+            dirflg: settings.dirType,
+            sort: settings.sortPref
           });
 
           window.location = url + p;
