@@ -19,6 +19,15 @@
     <script src="./locu_files/selector_search.js"></script>
 
     <style type="text/css">
+      body {
+        width: 100%;
+        height: 100%;
+        margin: auto 0px;
+      }
+      .half {
+        width: 50%;
+        float: left;
+      }
       .map {
         height: 100%;
         width: 100%;
@@ -76,7 +85,7 @@
       #settings {
         position: absolute;
         top: 6px;
-        right: 8px; 
+        left: 8px; 
       }
       #locationsList .button {
         background: #45484d; /* Old browsers */
@@ -92,14 +101,8 @@
         font-family: 'Verdana', 'sans-serif';
         padding: 12px 15px;
       }
-      body {
-        width: 100%;
-        height: 100%;
-        margin: auto 0px;
-      }
-      .half {
-        width: 50%;
-        float: left;
+      #locationsList .remove {
+        float:right;
       }
       #locationsList .bottom {
         width: 100%;
@@ -145,7 +148,7 @@
 
     <script id="locButton" type="text/html">
       <div class="button">
-        {{tag}}
+        <a class="tag">{{tag}}</a> <div class="remove">X</div>
       </div>
     </script>
 

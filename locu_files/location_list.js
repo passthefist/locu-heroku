@@ -22,6 +22,8 @@ function locationList(selector){
       return value.tag === tag;
     });
     locations.splice(index,1);
+    locations.save();
+    render();
   };
 
   this.removeAll = function() {
@@ -78,6 +80,11 @@ function locationList(selector){
         function(){
           alert("The location service could not be reached.");
         })
+      }).find(".remove")
+      .click(function(evt){
+        evt.stopPropagation();
+        var tag = $(this).siblings(".tag").text();
+        self.remove(tag);
       });
     });
 
