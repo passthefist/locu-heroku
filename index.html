@@ -166,9 +166,23 @@
         $("#locSearchContainer").hide();
         searchWidget = new SelectorSearch("#locSearchContainer");
         list = new locationList("#locationsList");
-        list.onNew(function(){
+        list.onNew(function() {
           searchWidget.show();
         });
+        list.onUpdate(function( ){
+          showsettings();
+        });
+        
+        function showsettings() {
+          if(list.count() > 0) {
+            $("#settings").fadeIn(3000);
+          } else {
+            $("#settings").fadeOut(1000);
+          }
+        }
+
+        showsettings();
+
         searchWidget.onSelected(function(loc){
           list.add(loc.name, loc.latitude, loc.longitude);
         });
@@ -177,10 +191,9 @@
           dirType  : 'r',
           sortPref : 'def'
         });
-          
+
         $("#settings").hide();
         setTimeout(function(){
-          $("#settings").fadeIn(1000);
         }, 3000);
 
         $("#settings").click(function() {

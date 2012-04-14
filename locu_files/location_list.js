@@ -3,6 +3,7 @@ function locationList(selector){
   var locations = saveable("locu_locations", []);
   var selectEvt = new Callbacks();
   var newEvt = new Callbacks();
+  var updated = new Callbacks();
   var self = this;
 
   this.add = function(tag, lat, lng){
@@ -47,12 +48,24 @@ function locationList(selector){
     newEvt.add(func);      
   }
 
+  this.onUpdate = function(func){
+    updated.add(func);      
+  }
+
+  this.count = function() {
+    return locations.length;
+  }
+
   function invokeSelected(loc){
     selectEvt.invoke(loc);
   }
 
   function invokeNew() {
     newEvt.invoke();
+  }
+
+  function invokeUpdated() {
+    updated.invoke();
   }
 
   function locp(coords) {
@@ -105,6 +118,8 @@ function locationList(selector){
     ich.optButton({text: "Add Current Location"})
       .appendTo(target.find(".bottom"))
       .click(addCurrent);
+
+    invokeUpdated();
   }
 
   function addCurrent(){
