@@ -103,7 +103,8 @@ function locationList(selector){
 
   function addCurrent(){
     navigator.geolocation.getCurrentPosition(function(geo) {
-        var tag = prompt("What is the name of this place?");
+        var tag = prompt("What is the name of this location?");
+
         if(tag) {
           self.add(tag, geo.coords.latitude, geo.coords.longitude);
         }
