@@ -169,24 +169,42 @@
         searchWidget.onSelected(function(loc){
           list.add(loc.name, loc.latitude, loc.longitude);
         });
+
+        var settings = saveable("settings", {
+          dirType  : 'r',
+          sortPref : 'def'
+        });
+          
         $("#settings").hide();
         setTimeout(function(){
           $("#settings").fadeIn(1000);
         }, 3000);
+
         $("#settings").click(function() {
+          $("#settingsMenu .dirType").val(settings.dirType);
+          $("#settingsMenu .sortPref").val(settings.sortPref);
+
           $("#settingsMenu").animate({
             top: "0px"
           }, 400);
         });
+
         $("#settingsMenu .clearLoc").click(function() {
           if(confirm("Are you sure? This will remove all your locations")){
             list.removeAll();
           }
         });
+
         $("#settingsMenu .save").click(function() {
-            $("#settingsMenu").animate({
-              top: ($(window).height()+50)
-            }, 350);
+          settings.dirType = $("#settingsMenu .dirType option:selected").val();
+          settings.sortPref = $("#settingsMenu .sortPref option:selected").val();
+          settings.save();
+
+          console.log(settings);
+          $("#settingsMenu").animate({
+            top: ($(window).height()+50)
+          }, 350);
+            
         });
       });
     </script>

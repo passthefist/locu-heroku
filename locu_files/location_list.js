@@ -69,9 +69,10 @@ function locationList(selector){
             daddr: locp(loc.coords),
             dirflg: 'r',
             z: 15,
-            ttype: 'now'
+            ttype: 'now',
+            dirtype: settings.dirType,
+            sortpref: settings.sortPref
           });
-          console.log("OpenMap");
 
           window.location = url + p;
         },

@@ -71,7 +71,7 @@ function Callbacks(){
 }
 
 function undef(obj){
-  return (typeof obj) === 'undefined'
+  return (typeof obj) === 'undefined';
 }
 
 function saveable(name, def){
@@ -79,7 +79,7 @@ function saveable(name, def){
   var obj = def;
 
   if(undef(localStorage)) {
-    throw "local storage is required"
+    throw "local storage is required";
   }
  
   function mixin() { 
